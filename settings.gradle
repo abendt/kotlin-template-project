@@ -1,0 +1,15 @@
+pluginManagement {
+    includeBuild 'buildLogic'
+}
+
+rootProject.name = 'kotlin-template-project'
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("libs.versions.toml"))
+        }
+    }
+}
+
+include 'module'

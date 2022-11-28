@@ -1,0 +1,41 @@
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+repositories {
+    mavenCentral()
+}
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(18))
+    }
+}
+
+dependencies {
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    }
+
+    // Align versions of all Kotlin components
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+
+    // Use the Kotlin JDK 8 standard library.
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+}
+
+def isIdea = providers.systemProperty("idea.version")
+tasks.withType(KotlinCompile) {
+    kotlinOptions {
+        if (!isIdea) {
+            // don't fail the build when running tests in idea!
+            allWarningsAsErrors = true
+        }
+        incremental = true
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "18"
+    }
+}

@@ -1,0 +1,68 @@
+[versions]
+
+# don't update yet. slf4j 2.x is not compatible with spring boot yet
+# https://github.com/spring-projects/spring-boot/issues/12649
+slf4j = "1.7.36"
+kotest = "5.5.4"
+logback = "1.2.11"
+
+junit = "5.9.1"
+
+# Fluentlenium is currently not compatible with selenium 4.3+
+selenium = "4.2.2"
+
+restAssured = "5.3.0"
+testcontainers = "1.17.3"
+
+jackson = "2.14.0"
+
+[libraries]
+
+# Logging
+
+# don't update yet. slf4j 2.x is not compatible with spring boot yet
+# https://github.com/spring-projects/spring-boot/issues/12649
+kotlinLogging = "io.github.microutils:kotlin-logging-jvm:2.1.23"
+
+slf4j-jul = { module = "org.slf4j:jul-to-slf4j", version.ref = "slf4j" }
+slf4j-jcl = { module = "org.slf4j:jcl-over-slf4j", version.ref = "slf4j" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
+
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+logback-core = { module = "ch.qos.logback:logback-core", version.ref = "logback" }
+
+jackson-bom = { module = "com.fasterxml.jackson:jackson-bom", version.ref="jackson" }
+
+# Testing
+mockk = "io.mockk:mockk:1.13.2"
+
+## Kotest
+kotest-runner = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-datatest = { module = "io.kotest:kotest-framework-datatest", version.ref = "kotest" }
+kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
+
+junit-bom = { module = "org.junit:junit-bom", version.ref="junit" }
+
+# rest-assured
+
+restAssured-core = { module = "io.rest-assured:rest-assured", version.ref = "restAssured" }
+restAssured-json = { module = "io.rest-assured:json-path", version.ref = "restAssured" }
+restAssured-xml = { module = "io.rest-assured:xml-path", version.ref = "restAssured" }
+restAssured-kotlin = { module = "io.rest-assured:kotlin-extensions", version.ref = "restAssured" }
+
+testcontainers-core = { module = "org.testcontainers:testcontainers", version.ref = "testcontainers" }
+testcontainers-mongodb = { module = "org.testcontainers:mongodb", version.ref = "testcontainers" }
+testcontainers-kotest = "io.kotest.extensions:kotest-extensions-testcontainers:1.3.3"
+
+[bundles]
+
+slf4j = ["slf4j-jul", "slf4j-jcl"]
+
+kotest = ["kotest-runner", "kotest-assertions", "kotest-datatest"]
+
+logback = ["logback-classic", "logback-core"]
+
+restassured = ["restAssured-core", "restAssured-json", "restAssured-xml", "restAssured-kotlin"]
+
+testcontainers = ["testcontainers-core", "testcontainers-kotest"]
