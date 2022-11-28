@@ -1,0 +1,37 @@
+name: build branch
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    name: main build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel Previous Runs
+        if: ${{ (github.ref != 'refs/heads/main') }}
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 18
+        uses: actions/setup-java@v3
+        with:
+          java-version: 18
+          distribution: 'zulu'
+          cache: 'gradle'
+
+      - name: run Build & Tests
+        run: ./gradlew build --no-daemon
+
+      - name: Publish Test reports
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          check_name: Test Reports
+          report_paths: '**/build/test-results/*/TEST-*.xml'
