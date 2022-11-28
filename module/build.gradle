@@ -1,0 +1,6 @@
+plugins {
+    id "module-conventions"
+}
+
+dependencies {
+}
