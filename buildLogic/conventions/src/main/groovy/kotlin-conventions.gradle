@@ -28,7 +28,7 @@ dependencies {
 }
 
 def isIdea = providers.systemProperty("idea.version")
-tasks.withType(KotlinCompile) {
+tasks.withType(KotlinCompile).configureEach {
     kotlinOptions {
         if (!isIdea) {
             // don't fail the build when running tests in idea!
