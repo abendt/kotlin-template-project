@@ -14,6 +14,7 @@ dependencies {
     testImplementation(libs.mockk)
 
     runtimeOnly(libs.bundles.logback)
+    runtimeOnly(libs.bundles.slf4j)
 }
 
 configurations {
@@ -45,6 +46,22 @@ testing {
     suites {
         test {
             useJUnitJupiter("5.9.1")
+
+            dependencies {
+            }
+        }
+
+        configureEach {
+            targets {
+                all {
+                    testTask.configure {
+                        def loggingProperties = new File(workingDir, "src/test/resoures/logging.properties")
+                        if (loggingProperties.exists()) {
+                            systemProperties(['java.util.logging.config.file': loggingProperties])
+                        }
+                    }
+                }
+            }
         }
     }
 }

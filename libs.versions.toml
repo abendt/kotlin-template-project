@@ -1,10 +1,8 @@
 [versions]
 
-# don't update yet. slf4j 2.x is not compatible with spring boot yet
-# https://github.com/spring-projects/spring-boot/issues/12649
-slf4j = "1.7.36"
+slf4j = "2.0.6"
 kotest = "5.5.4"
-logback = "1.2.11"
+logback = "1.4.5"
 
 junit = "5.9.1"
 
@@ -19,10 +17,7 @@ jackson = "2.14.0"
 [libraries]
 
 # Logging
-
-# don't update yet. slf4j 2.x is not compatible with spring boot yet
-# https://github.com/spring-projects/spring-boot/issues/12649
-kotlinLogging = "io.github.microutils:kotlin-logging-jvm:2.1.23"
+kotlinLogging = "io.github.microutils:kotlin-logging-jvm:3.0.4"
 
 slf4j-jul = { module = "org.slf4j:jul-to-slf4j", version.ref = "slf4j" }
 slf4j-jcl = { module = "org.slf4j:jcl-over-slf4j", version.ref = "slf4j" }
@@ -34,7 +29,7 @@ logback-core = { module = "ch.qos.logback:logback-core", version.ref = "logback"
 jackson-bom = { module = "com.fasterxml.jackson:jackson-bom", version.ref="jackson" }
 
 # Testing
-mockk = "io.mockk:mockk:1.13.2"
+mockk = "io.mockk:mockk:1.13.3"
 
 ## Kotest
 kotest-runner = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }

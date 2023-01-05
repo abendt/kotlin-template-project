@@ -28,6 +28,7 @@ dependencies {
 }
 
 def isIdea = providers.systemProperty("idea.version")
+def isProduction = false
 tasks.withType(KotlinCompile).configureEach {
     kotlinOptions {
         if (!isIdea) {
@@ -36,6 +37,11 @@ tasks.withType(KotlinCompile).configureEach {
         }
         incremental = true
         freeCompilerArgs = ["-Xjsr305=strict"]
+
+        if (!isProduction) {
+            freeCompilerArgs += "-Xdebug"
+        }
+
         jvmTarget = "18"
     }
 }
