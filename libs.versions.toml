@@ -1,10 +1,10 @@
 [versions]
 
-slf4j = "2.0.6"
-kotest = "5.5.4"
-logback = "1.4.5"
+slf4j = "2.0.7"
+kotest = "5.5.5"
+logback = "1.4.6"
 
-junit = "5.9.1"
+junit = "5.9.2"
 
 # Fluentlenium is currently not compatible with selenium 4.3+
 selenium = "4.2.2"
@@ -17,7 +17,7 @@ jackson = "2.14.0"
 [libraries]
 
 # Logging
-kotlinLogging = "io.github.microutils:kotlin-logging-jvm:3.0.4"
+kotlinLogging = "io.github.microutils:kotlin-logging-jvm:3.0.5"
 
 slf4j-jul = { module = "org.slf4j:jul-to-slf4j", version.ref = "slf4j" }
 slf4j-jcl = { module = "org.slf4j:jcl-over-slf4j", version.ref = "slf4j" }
@@ -29,7 +29,8 @@ logback-core = { module = "ch.qos.logback:logback-core", version.ref = "logback"
 jackson-bom = { module = "com.fasterxml.jackson:jackson-bom", version.ref="jackson" }
 
 # Testing
-mockk = "io.mockk:mockk:1.13.3"
+mockk = "io.mockk:mockk:1.13.4"
+springmockk = "com.ninja-squad:springmockk:4.0.2"
 
 ## Kotest
 kotest-runner = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }

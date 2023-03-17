@@ -6,6 +6,9 @@ plugins {
     id 'jvm-test-suite'
 }
 
+def catalogs = project.extensions.getByType(VersionCatalogsExtension)
+def version = {String name -> catalogs.named("libs").findVersion(name).get().getRequiredVersion()}
+
 dependencies {
     implementation(libs.kotlinLogging)
 
@@ -45,7 +48,7 @@ testlogger {
 testing {
     suites {
         test {
-            useJUnitJupiter("5.9.1")
+            useJUnitJupiter(version("junit"))
 
             dependencies {
             }

@@ -7,6 +7,10 @@ plugins {
     id 'io.spring.dependency-management'
 }
 
+def catalogs = project.extensions.getByType(VersionCatalogsExtension)
+def version = {String name -> catalogs.named("libs").findVersion(name).get().getRequiredVersion()}
+def bundle = {String name -> catalogs.named("libs").findBundle(name).get()}
+
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework.boot:spring-boot-starter-web"
@@ -19,7 +23,7 @@ dependencies {
 testing {
     suites {
         integrationTest(JvmTestSuite) {
-            useJUnitJupiter("5.9.1")
+            useJUnitJupiter(version("junit"))
 
             dependencies {
                 implementation project()
@@ -28,8 +32,8 @@ testing {
                 implementation("io.kotest.extensions:kotest-extensions-spring:1.1.2") {
                     exclude(group: "io.kotest")
                 }
-                implementation "com.ninja-squad:springmockk:4.0.0"
-                // springBootTestApi(libs.bundles.restassured)
+                implementation "com.ninja-squad:springmockk:4.0.2"
+                implementation.bundle(bundle("restassured"))
             }
         }
     }
@@ -47,6 +51,6 @@ testing {
     spring-boot bom for reference (check the version):
     https://central.sonatype.dev/artifact/org.springframework.boot/spring-boot-dependencies/3.0.1
  */
-ext["junit-jupiter.version"] = libs.versions.junit.get()
-ext["jackson-bom.version"] = libs.versions.jackson.get()
-ext["selenium.version"] = libs.versions.selenium.get()
+ext["junit-jupiter.version"] = version("junit")
+ext["jackson-bom.version"] = version("jackson")
+ext["selenium.version"] = version("selenium")
